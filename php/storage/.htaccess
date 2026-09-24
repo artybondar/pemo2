@@ -1,0 +1,2 @@
+# Запрещаем прямой доступ к CSV-логам и файлам rate-limit через браузер
+Require all denied

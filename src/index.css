@@ -23,6 +23,15 @@
   --animate-spin-slow: spin 8s linear infinite;
 }
 
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -62,5 +71,13 @@
       padding-left: 3rem;
       padding-right: 3rem;
     }
+  }
+
+  .animate-marquee {
+    animation: marquee-scroll 38s linear infinite;
+  }
+  .group:hover .animate-marquee,
+  .animate-marquee.is-paused {
+    animation-play-state: paused;
   }
 }

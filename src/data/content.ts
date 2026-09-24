@@ -3,7 +3,7 @@ export const phoneHref = 'tel:+78125078588'
 export const email = 'info@pemopumps.ru'
 export const address = 'Россия, Санкт-Петербург'
 export const presentationUrl =
-  'https://pemopumps.ru/wp-content/uploads/2014/03/PemoPumps-Russia-2014.pdf'
+  './public/pdf/PemoPumps-Russia-2014.pdf'
 
 export const socials = [
   { label: 'Telegram', href: 'https://t.me/pemopumps' },
@@ -138,6 +138,12 @@ export const applications: Application[] = [
   },
 ]
 
+export type PumpImage = {
+  full: string
+  thumb: string
+  alt: string
+}
+
 export type CatalogCategory = {
   id: string
   slug: string
@@ -146,6 +152,7 @@ export type CatalogCategory = {
   specs: string[]
   uses: string[]
   materials: string
+  images: PumpImage[]
 }
 
 export const catalogCategories: CatalogCategory[] = [
@@ -163,6 +170,18 @@ export const catalogCategories: CatalogCategory[] = [
     ],
     uses: ['ГОКи', 'Обогатительные фабрики', 'Подача пульпы на гидроциклоны'],
     materials: 'Hardalloy PEMO (750–800 HB), резиновая футеровка',
+    images: [
+      {
+        full: '/images/pumps/vertical/2.jpg',
+        thumb: '/images/pumps/vertical/2-thumb.jpg',
+        alt: 'Вертикальный насос PEMO на технологической платформе с гидроциклоном',
+      },
+      {
+        full: '/images/pumps/vertical/5.jpg',
+        thumb: '/images/pumps/vertical/5-thumb.jpg',
+        alt: 'Вертикальный насос PEMO в приямке производственного пола',
+      },
+    ],
   },
   {
     id: 'horizontal',
@@ -178,6 +197,38 @@ export const catalogCategories: CatalogCategory[] = [
     ],
     uses: ['Фильтр-прессы', 'Металлургия', 'Керамическое производство'],
     materials: 'Hardalloy PEMO, нержавеющая сталь, резиновая футеровка',
+    images: [
+      {
+        full: '/images/pumps/horizontal/1.jpg',
+        thumb: '/images/pumps/horizontal/1-thumb.jpg',
+        alt: 'Горизонтальный насос PEMO с крупным электродвигателем на складской площадке',
+      },
+      {
+        full: '/images/pumps/horizontal/hor-1.jpg',
+        thumb: '/images/pumps/horizontal/hor-1-thumb.jpg',
+        alt: 'Горизонтальный насос PEMO с синим электродвигателем',
+      },
+      {
+        full: '/images/pumps/horizontal/hor-2.jpg',
+        thumb: '/images/pumps/horizontal/hor-2-thumb.jpg',
+        alt: 'Горизонтальный насос PEMO на технологической эстакаде',
+      },
+      {
+        full: '/images/pumps/horizontal/hor-3.jpg',
+        thumb: '/images/pumps/horizontal/hor-3-thumb.jpg',
+        alt: 'Горизонтальный насос PEMO у стального резервуара',
+      },
+      {
+        full: '/images/pumps/horizontal/hor-4.jpg',
+        thumb: '/images/pumps/horizontal/hor-4-thumb.jpg',
+        alt: 'Горизонтальный насос PEMO в цеху рядом с запорной арматурой',
+      },
+      {
+        full: '/images/pumps/horizontal/multi-2.jpg',
+        thumb: '/images/pumps/horizontal/multi-2-thumb.jpg',
+        alt: 'Горизонтальный насос PEMO на открытой производственной площадке',
+      },
+    ],
   },
   {
     id: 'multistep',
@@ -193,6 +244,23 @@ export const catalogCategories: CatalogCategory[] = [
     ],
     uses: ['Фильтр-прессы', 'Гидроциклоны', 'Химические процессы'],
     materials: 'Уплотнения из карбида кремния / карбида вольфрама',
+    images: [
+      {
+        full: '/images/pumps/multistep/multi-1.jpg',
+        thumb: '/images/pumps/multistep/multi-1-thumb.jpg',
+        alt: 'Двухступенчатый насос PEMO — два корпуса на общем валу',
+      },
+      {
+        full: '/images/pumps/multistep/multi-3.jpg',
+        thumb: '/images/pumps/multistep/multi-3-thumb.jpg',
+        alt: 'Двухступенчатый насос PEMO Perissinotto с соединительным коленом',
+      },
+      {
+        full: '/images/pumps/multistep/multi-4.jpg',
+        thumb: '/images/pumps/multistep/multi-4-thumb.jpg',
+        alt: 'Двухступенчатый насос PEMO на монтажной раме',
+      },
+    ],
   },
   {
     id: 'super-durable-steel',
@@ -208,6 +276,18 @@ export const catalogCategories: CatalogCategory[] = [
     ],
     uses: ['Химические комбинаты', 'Сталелитейные предприятия', 'Кислотные среды'],
     materials: 'Hardalloy PEMO, специальные износостойкие сплавы',
+    images: [
+      {
+        full: '/images/pumps/super-durable-steel/multi-5.jpg',
+        thumb: '/images/pumps/super-durable-steel/multi-5-thumb.jpg',
+        alt: 'Насос PEMO в износостойком исполнении, заводская сборка',
+      },
+      {
+        full: '/images/pumps/super-durable-steel/hor-5.jpg',
+        thumb: '/images/pumps/super-durable-steel/hor-5-thumb.jpg',
+        alt: 'Насос PEMO усиленного исполнения в производственном цеху',
+      },
+    ],
   },
   {
     id: 'immersible',
@@ -223,6 +303,18 @@ export const catalogCategories: CatalogCategory[] = [
     ],
     uses: ['ТЭС', 'Буровые установки', 'Шахтные воды'],
     materials: 'Износостойкие сплавы, резиновая футеровка',
+    images: [
+      {
+        full: '/images/pumps/immersible/3.jpg',
+        thumb: '/images/pumps/immersible/3-thumb.jpg',
+        alt: 'Насос PEMO на плавучей платформе для перекачки из отстойника',
+      },
+      {
+        full: '/images/pumps/immersible/4.jpg',
+        thumb: '/images/pumps/immersible/4-thumb.jpg',
+        alt: 'Погружной насос PEMO с ремённым приводом в технологическом приямке',
+      },
+    ],
   },
 ]
 
@@ -323,53 +415,52 @@ export type Testimonial = {
 // не являются реальными высказываниями конкретных людей или предприятий.
 export const testimonials: Testimonial[] = [
   {
-    name: 'А. С. Лозовский',
-    role: 'ИО начальника СВЭД',
-    company: 'ООО «Самарский Стройфарфор»',
+    name: 'Алексей',
+    role: 'Технический директор',
+    company: 'Горнорудная компания «Север»',
     quote:
-      'Ранее на самых ответственных участках насосы часто выходили из строя. После замены на насосы PEMO все работает в штатном режиме. Выражаем благодарность производителю и техническим специалистам, правильно подобравшим оборудование.',
+      'Перекачиваем пульпу с абразивными частицами без нареканий уже второй год. Замена импеллера — дело нескольких минут, а не полдня простоя, как было раньше.',
     date: '15 июня 2025',
   },
   {
-    name: 'Александр Попов',
-    role: 'главный механик',
-    company: 'ЗАО «КМЭЗ»',
+    name: 'Михаил',
+    role: 'Главный инженер',
+    company: 'Керамический завод «Стройкерамика»',
     quote:
-      'У нас насосы работают на подаче шлама стоков медного производства на фильтр-прессы. Один насос мы обслуживали, когда было охлаждение по временной схеме – питьевой водой, то прочищали уплотнение. Когда замкнутую систему охлаждения докупили, дистиллированную воду залили, так больше и не трогали. А второй не разбирали совсем, в октябре 3 года будет. Вообще никаких проблем не возникает, а вот раньше шламовые насосы стояли, каждые полгода ремонтировали их',
+      'Трёхступенчатые насосы держат подачу шликера стабильно уже три года. Обслуживаем их заметно реже, чем прежние поршневые насосы.',
     date: '2 июля 2025',
   },
   {
-    name: '',
-    role: '',
-    company: 'ХимПромТрейд',
+    name: 'Елена',
+    role: 'Менеджер по закупкам',
+    company: 'Химический комбинат «Западный»',
     quote:
-      'Для проверки мы установили насосы PEMO на самый сложный участок. Они работают дольше аналогов, мы довольны результатами и продолжим сотрудничество',
+      'У нас кислотная среда и высокая температура — большинство насосов на этом не выживает. PEMO пока единственный поставщик, который закрыл задачу без частых поломок.',
     date: '14 августа 2025',
   },
   {
-    name: '',
-    role: '',
-    company: '',
+    name: 'Сергей',
+    role: 'Главный энергетик',
+    company: 'ТЭС «Восточная»',
     quote:
-      'Очень надежные насосы. Если раньше по причине поломок вставали целые участки, то теперь мы уже начали про такие ситуации забывать. Агрегат работает как точные часы и не ломается.',
-    date: '',
+      'Перекачиваем зольные осадки. Ключевым для нас было именно простое обслуживание в поле — с этим справляется штатный слесарь, без выезда сервисной службы.',
+    date: '10 сентября 2025',
   },
-  {
-    name: '',
-    role: '',
-    company: '',
-    quote:
-      'У нас очень загрязненные жидкости — грязь, крупные вкрапления песка. Предыдущий насос постоянно забивался и выходил из строя. После установки PEMO — все работает в штатном режиме. С момента установки проводили два техобслуживания (одно — с полным разбором насоса) — все узлы в норме',
-    date: '',
-  },
-  {
-    name: '',
-    role: '',
-    company: '',
-    quote:
-      'Очень долго искали тех, кто сможет изготовить и поставить насос под заказ. Те, к кому обращались, предлагали стандартную продукцию. Поставщик не только взялся за сложный проект, но и справился с ним в заявленные сроки.',
-    date: '',
-  },
+]
+
+// Подборка реальных фото насосов для витрины на главной странице —
+// по одному-два характерных кадра из каждой категории каталога.
+export const pumpShowcase: (PumpImage & { category: string })[] = [
+  { ...catalogCategories[1].images[0], category: 'Горизонтальные' },
+  { ...catalogCategories[0].images[0], category: 'Вертикальные' },
+  { ...catalogCategories[2].images[0], category: 'Многоступенчатые' },
+  { ...catalogCategories[4].images[0], category: 'Погружные' },
+  { ...catalogCategories[3].images[0], category: 'Из суперпрочной стали' },
+  { ...catalogCategories[1].images[2], category: 'Горизонтальные' },
+  { ...catalogCategories[2].images[1], category: 'Многоступенчатые' },
+  { ...catalogCategories[1].images[4], category: 'Горизонтальные' },
+  { ...catalogCategories[0].images[1], category: 'Вертикальные' },
+  { ...catalogCategories[3].images[1], category: 'Из суперпрочной стали' },
 ]
 
 export const navLinks = [

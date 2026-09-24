@@ -1,21 +1,31 @@
 import { type FormEvent, useState } from 'react'
 import SectionHeading from '../components/SectionHeading'
 import { address, email, phone, phoneHref, presentationUrl, socials } from '../data/content'
+import { submitLead } from '../lib/api'
 
 export default function Contacts() {
   const [name, setName] = useState('')
   const [contact, setContact] = useState('')
   const [message, setMessage] = useState('')
+  const [website, setWebsite] = useState('') // honeypot
   const [error, setError] = useState('')
+  const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     if (!name.trim() || !contact.trim()) {
       setError('Заполните имя и телефон или e-mail — иначе мы не сможем связаться с вами.')
       return
     }
     setError('')
+    setSending(true)
+    const result = await submitLead({ name, contact, message, website })
+    setSending(false)
+    if (!result.ok) {
+      setError('Не удалось отправить заявку. Позвоните напрямую: ' + phone)
+      return
+    }
     setSent(true)
   }
 
@@ -89,6 +99,16 @@ export default function Contacts() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} noValidate>
+                {/* honeypot: скрыто от людей, но видно ботам-автозаполнителям */}
+                <input
+                  type="text"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden="true"
+                />
                 <div className="grid gap-5 sm:grid-cols-2">
                   <label className="block">
                     <span className="font-mono text-xs uppercase text-ink-faint">Имя</span>
@@ -124,9 +144,10 @@ export default function Contacts() {
                 {error && <p className="mt-3 text-sm text-accent-deep">{error}</p>}
                 <button
                   type="submit"
-                  className="mt-6 border border-accent bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-deep hover:border-accent-deep"
+                  disabled={sending}
+                  className="mt-6 border border-accent bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-deep hover:border-accent-deep disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Отправить заявку
+                  {sending ? 'Отправляем…' : 'Отправить заявку'}
                 </button>
               </form>
             )}

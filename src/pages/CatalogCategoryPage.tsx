@@ -1,5 +1,6 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { catalogCategories, phone, phoneHref } from '../data/content'
+import PumpGallery from '../components/PumpGallery'
 
 export default function CatalogCategoryPage() {
   const { slug } = useParams()
@@ -22,6 +23,15 @@ export default function CatalogCategoryPage() {
       </section>
 
       <section className="container-px py-16 lg:py-24">
+        {category.images.length > 0 && (
+          <div className="mb-14">
+            <p className="font-mono text-xs uppercase text-ink-faint">Фото с объектов</p>
+            <div className="mt-4">
+              <PumpGallery images={category.images} />
+            </div>
+          </div>
+        )}
+
         <div className="grid gap-8 sm:grid-cols-3">
           <div className="border-t border-line pt-6">
             <p className="font-mono text-xs uppercase text-ink-faint">Характеристики</p>

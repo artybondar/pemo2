@@ -1,6 +1,7 @@
 import { type FormEvent, useState } from 'react'
 import SectionHeading from '../components/SectionHeading'
 import { testimonials } from '../data/content'
+import { submitReview } from '../lib/api'
 
 type Review = {
   name: string
@@ -13,10 +14,21 @@ export default function Reviews() {
   const [name, setName] = useState('')
   const [company, setCompany] = useState('')
   const [text, setText] = useState('')
+  const [website, setWebsite] = useState('') // honeypot
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState('')
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     if (!name.trim() || !text.trim()) return
+    setError('')
+    setSending(true)
+    const result = await submitReview({ name, company, text, website })
+    setSending(false)
+    if (!result.ok) {
+      setError('Не удалось отправить отзыв. Попробуйте ещё раз позже.')
+      return
+    }
     setReviews((prev) => [{ name, company, text }, ...prev])
     setName('')
     setCompany('')
@@ -47,6 +59,16 @@ export default function Reviews() {
               lede="Расскажите, на какой задаче используете насос, какое исполнение и как долго он в эксплуатации."
             />
             <form onSubmit={handleSubmit} className="mt-10 border-t border-line pt-8">
+              {/* honeypot: скрыто от людей, но видно ботам-автозаполнителям */}
+              <input
+                type="text"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                aria-hidden="true"
+              />
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="block">
                   <span className="font-mono text-xs uppercase text-ink-faint">Имя</span>
@@ -79,11 +101,17 @@ export default function Reviews() {
                   placeholder="Модель насоса, задача, срок эксплуатации"
                 />
               </label>
+              <p className="mt-3 text-xs leading-relaxed text-ink-faint">
+                Отзыв уходит на модерацию администратору и появляется на
+                сайте после проверки.
+              </p>
+              {error && <p className="mt-2 text-sm text-accent-deep">{error}</p>}
               <button
                 type="submit"
-                className="mt-6 border border-accent bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-deep hover:border-accent-deep"
+                disabled={sending}
+                className="mt-4 border border-accent bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-deep hover:border-accent-deep disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Опубликовать
+                {sending ? 'Отправляем…' : 'Отправить на модерацию'}
               </button>
             </form>
           </div>
@@ -96,7 +124,7 @@ export default function Reviews() {
                     <p className="text-sm leading-relaxed text-ink-soft">{r.text}</p>
                     <p className="mt-2 font-mono text-xs uppercase text-ink-faint">
                       {r.name}
-                      {r.company ? ` · ${r.company}` : ''}
+                      {r.company ? ` · ${r.company}` : ''} · на модерации
                     </p>
                   </li>
                 ))}

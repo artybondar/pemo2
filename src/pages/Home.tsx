@@ -4,6 +4,7 @@ import SectionHeading from '../components/SectionHeading'
 import IndustrySelector from '../components/IndustrySelector'
 import TcoCalculator from '../components/TcoCalculator'
 import Testimonials from '../components/Testimonials'
+import PumpShowcase from '../components/PumpShowcase'
 import {
   advantages,
   companyStats,
@@ -73,6 +74,22 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* PHOTO SHOWCASE — реальные насосы PEMO в эксплуатации */}
+      <section className="border-b border-line bg-bg py-10 lg:py-14">
+        <div className="container-px mb-6 flex items-end justify-between gap-4">
+          <div>
+            <p className="font-mono text-xs text-accent-deep">На объектах заказчиков</p>
+            <h2 className="mt-1 font-display text-2xl font-semibold text-ink sm:text-3xl">
+              Насосы PEMO в работе
+            </h2>
+          </div>
+          <Link to="/catalog" className="hidden shrink-0 text-sm font-medium text-accent-deep hover:underline sm:block">
+            Смотреть по категориям →
+          </Link>
+        </div>
+        <PumpShowcase />
       </section>
 
       {/* ADVANTAGES */}

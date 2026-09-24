@@ -65,7 +65,17 @@ export default function Catalog() {
             {filtered.map((c) => (
               <div key={c.id} className="grid gap-6 py-8 lg:grid-cols-[1fr_2fr] lg:gap-10">
                 <div>
-                  <h2 className="font-display text-2xl font-semibold text-ink">{c.title}</h2>
+                  <Link to={`/catalog/${c.slug}`} className="block overflow-hidden border border-line">
+                    {c.images[0] && (
+                      <img
+                        src={c.images[0].thumb}
+                        alt={c.images[0].alt}
+                        loading="lazy"
+                        className="aspect-[4/3] w-full object-cover transition-transform duration-500 hover:scale-105"
+                      />
+                    )}
+                  </Link>
+                  <h2 className="mt-4 font-display text-2xl font-semibold text-ink">{c.title}</h2>
                   <Link
                     to={`/catalog/${c.slug}`}
                     className="mt-2 inline-block text-sm font-medium text-accent-deep hover:underline"

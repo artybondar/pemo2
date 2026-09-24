@@ -1,0 +1,18 @@
+# SPA fallback: React Router обрабатывает маршруты на клиенте,
+# поэтому все запросы, которые не указывают на реальный файл/папку
+# (и не идут в /php/...), должны отдавать index.html.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  RewriteCond %{REQUEST_URI} !^/php/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# Явно закрываем доступ к служебным PHP-папкам на случай,
+# если основной .htaccess в /php/storage/ не сработает.
+<FilesMatch "\.(csv)$">
+  Require all denied
+</FilesMatch>
